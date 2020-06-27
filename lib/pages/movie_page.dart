@@ -137,7 +137,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
           ),
           Expanded(
             child: Container(
-              color: Color(0xFF424242),
+              color: Color(0xFF525252),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -174,7 +174,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
           ),
           Expanded(
             child: Container(
-              color: Color(0xFF424242),
+              color: Color(0xFF525252),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -212,7 +212,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
           ),
           Expanded(
             child: Container(
-              decoration: BoxDecoration(color: Color(0xFF424242)),
+              decoration: BoxDecoration(color: Color(0xFF525252)),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -250,7 +250,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
           ),
           Expanded(
             child: Container(
-              decoration: BoxDecoration(color: Color(0xFF424242)),
+              decoration: BoxDecoration(color: Color(0xFF525252)),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -374,14 +374,14 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
             appBar: _buildAppBar(snapshot.data.name),
             body: Container(
               height: double.infinity,
-              decoration: BoxDecoration(color: Color(0xFF525252)),
+              decoration: BoxDecoration(color: Color(0xFF424242)),
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: <Widget>[
                     Card(
                       elevation: 8.0,
-                      color: Color(0xFF424242),
+                      color: Color(0xFF525252),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -512,7 +512,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
                     ),
                     Card(
                       elevation: 8.0,
-                      color: Color(0xFF424242),
+                      color: Color(0xFF525252),
                       child: (snapshot.data.providers != null)
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -547,7 +547,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
                           : Center(
                               child: Container(
                                   decoration:
-                                      BoxDecoration(color: Color(0xFF424242)),
+                                      BoxDecoration(color: Color(0xFF525252)),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(

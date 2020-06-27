@@ -1,4 +1,4 @@
-import 'package:fliccs/ui/start_page.dart';
+import 'file:///D:/projects/fliccs/lib/pages/start_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());

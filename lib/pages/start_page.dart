@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
 import 'package:fliccs/model/justwatch.dart';
-import 'package:fliccs/ui/search_results_page.dart';
+import 'file:///D:/projects/fliccs/lib/pages/search_results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/services.dart';

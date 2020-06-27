@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:fliccs/model/justwatch.dart';
-import 'package:fliccs/ui/movie_page.dart';
+import 'file:///D:/projects/fliccs/lib/pages/movie_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 
