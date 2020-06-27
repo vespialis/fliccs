@@ -1,16 +1,22 @@
 # fliccs
+fliccs is a mobile app being developed with Flutter for both Android and iOS.
+fliccs helps you to find where to find the show/movie you want to watch.
 
-Application for the Telephoners Science Club.
+Application is being created as AGH's scienceclub "Telephoners" project.
 
-## Getting Started
+# JustWatch API
+fliccs uses unofficial JustWatchAPI written in Dart and based on [dawoudt's JustWatchAPI (python)](https://github.com/dawoudt/JustWatchAPI "dawoudt's JustWatchAPI")
 
-This project is a starting point for a Flutter application.
+# Disclaimer
+Please have in mind that fliccs is still in its early stage. There are plenty ideas that will hopefully 
 
-A few resources to get you started if this is your first Flutter project:
+# Images
+![](http://searchengine.crosswiert.pl/images/Screenshot_20200627-190626.jpg)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![](http://searchengine.crosswiert.pl/images/Screenshot_20200627-190630.jpg)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![](http://searchengine.crosswiert.pl/images/Screenshot_20200627-190637.jpg)
+
+![](http://searchengine.crosswiert.pl/images/Screenshot_20200627-190641.jpg)
+
+
