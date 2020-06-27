@@ -11,12 +11,10 @@ fliccs uses unofficial JustWatchAPI written in Dart and based on [dawoudt's Just
 Please have in mind that fliccs is still in its early stage. There are plenty ideas that will hopefully be added soon.
 
 # Images
-![](http://searchengine.crosswiert.pl/images/Screenshot_20200627-190626.jpg)
+![](http://searchengine.crosswiert.pl/images/image1.png)
 
-![](http://searchengine.crosswiert.pl/images/Screenshot_20200627-190630.jpg)
+![](http://searchengine.crosswiert.pl/images/image3.png)
 
-![](http://searchengine.crosswiert.pl/images/Screenshot_20200627-190637.jpg)
 
-![](http://searchengine.crosswiert.pl/images/Screenshot_20200627-190641.jpg)
 
 
