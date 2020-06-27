@@ -1,10 +1,8 @@
 # fliccs
 fliccs is a mobile app being developed with Flutter for both Android and iOS.
-fliccs helps you to find where to find the show/movie you want to watch.
+fliccs helps you to find where to watch the show/movie that interests you.
 
-Application is being created as AGH's scienceclub "Telephoners" project.
-
-Graphic design: [sabaroof](https://github.com/sabaroof "sabaroof")
+Application is being created as AGH's scienceclub "Telephoners" project with [sabaroof](https://github.com/sabaroof "sabaroof") (graphic design).
 
 # JustWatch API
 fliccs uses unofficial JustWatchAPI written in Dart and based on [dawoudt's JustWatchAPI (python)](https://github.com/dawoudt/JustWatchAPI "dawoudt's JustWatchAPI")
