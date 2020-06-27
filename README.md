@@ -4,6 +4,8 @@ fliccs helps you to find where to find the show/movie you want to watch.
 
 Application is being created as AGH's scienceclub "Telephoners" project.
 
+Graphic design: [sabaroof](https://github.com/sabaroof "sabaroof")
+
 # JustWatch API
 fliccs uses unofficial JustWatchAPI written in Dart and based on [dawoudt's JustWatchAPI (python)](https://github.com/dawoudt/JustWatchAPI "dawoudt's JustWatchAPI")
 
