@@ -1,5 +1,5 @@
 # fliccs
-fliccs is a mobile app being developed using Flutter for both Android and iOS. <br />
+fliccs is the mobile app being developed using Flutter for both Android and iOS. <br />
 fliccs helps you to find where to watch the show/movie that interests you.
 
 Application is being created as AGH's scienceclub "Telephoners" project with [sabaroof](https://github.com/sabaroof "sabaroof") (graphic design).
