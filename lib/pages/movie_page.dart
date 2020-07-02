@@ -451,9 +451,11 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: SizedBox(
-                                        width: width * 0.25,
-                                        child: Image(
-                                            image: NetworkImage(posterUrl))),
+                                        width: ScreenUtil().setWidth(296),
+                                        height: ScreenUtil().setHeight(420),
+                                        child: FadeInImage.assetNetwork(
+                                            placeholder: 'assets/fliccs_logo.png',
+                                            image: posterUrl)),
                                   ),
                                   Text(
                                     snapshot.data.contentType,
