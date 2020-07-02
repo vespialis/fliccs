@@ -20,6 +20,71 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
   Future<Movie> _getMovieDetails;
   String posterUrl;
 
+  Widget _buildProviderLogo(var providerUrl){
+    ScreenUtil.init(width: 1080, height: 2280, allowFontScaling: false);
+    var blackBackgroundLogos = ['chili'];
+    bool forceBlackBackground = false;
+    String imageUri;
+
+    if (providerUrl.host.toString().contains('chili')){
+      imageUri = 'assets/chili.png';
+    } else if (providerUrl.host.toString().contains('google')){
+      imageUri = 'assets/google.png';
+    } else if (providerUrl.host.toString().contains('hbogo')){
+      imageUri = 'assets/hbo_go.png';
+    } else if (providerUrl.host.toString().contains('hbo')){
+      imageUri = 'assets/hbo.png';
+    } else if (providerUrl.host.toString().contains('netflix')){
+      imageUri = 'assets/netflix.png';
+    } else if (providerUrl.host.toString().contains('prime')){
+      imageUri = 'assets/prime_video.png';
+    } else if (providerUrl.host.toString().contains('youtube')){
+      imageUri = 'assets/youtube.png';
+    } else if (providerUrl.host.toString().contains('itunes')){
+      imageUri = 'assets/itunes.png';
+    }
+
+    for (String provider in blackBackgroundLogos){
+      if (providerUrl.toString().contains(provider) || imageUri == null){
+        forceBlackBackground = true;
+        break;
+      }
+    }
+    return Container(
+      decoration: BoxDecoration(
+        color: forceBlackBackground?Colors.black:Color(0xFFf1faee),
+        borderRadius: BorderRadius.circular(8)
+      ),
+      child: (SizedBox(
+        width: 90,
+        height: 90,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: (imageUri != null)?Image.asset(imageUri, fit: BoxFit.contain):AutoSizeText(
+              providerUrl.host.replaceAll('www.', ''),
+              minFontSize: 0.0,
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                color: Color(0xFFf1faee),
+                shadows: <Shadow>[
+                  Shadow(
+                    offset: Offset(0.0, ScreenUtil().setHeight(3.0)),
+                    blurRadius: 0.0,
+                    color: Color(0xFFff6b6b),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      )),
+    );
+  }
+
   Widget _buildProviderCard(var provider) {
     ScreenUtil.init(width: 1080, height: 2280, allowFontScaling: false);
     var providerUrl = Uri.parse(provider['urls']['standard_web']);
@@ -36,29 +101,15 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
-                  AutoSizeText(
-                    providerUrl.host.replaceAll('www.', ''),
-                    minFontSize: 0.0,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      color: Color(0xFFf1faee),
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(0.0, ScreenUtil().setHeight(3.0)),
-                          blurRadius: 0.0,
-                          color: Color(0xFFff6b6b),
-                        )
-                      ],
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: _buildProviderLogo(providerUrl),
                   ),
                   (provider['retail_price'] != null)
                       ? Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: AutoSizeText(
-                            provider['retail_price'].toString() +
+                            provider['retail_price'].toStringAsFixed(2) +
                                 ' ' +
                                 provider['currency'],
                             style: TextStyle(color: Color(0xFFf1faee)),
@@ -139,6 +190,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
             child: Container(
               color: Color(0xFF525252),
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: free,
@@ -176,6 +228,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
             child: Container(
               color: Color(0xFF525252),
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: streaming,
@@ -214,6 +267,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
             child: Container(
               decoration: BoxDecoration(color: Color(0xFF525252)),
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: rent,
@@ -252,6 +306,7 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
             child: Container(
               decoration: BoxDecoration(color: Color(0xFF525252)),
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: buy,
@@ -379,115 +434,118 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: <Widget>[
-                    Card(
-                      elevation: 8.0,
-                      color: Color(0xFF525252),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: SizedBox(
-                                      width: width * 0.25,
-                                      child: Image(
-                                          image: NetworkImage(posterUrl))),
-                                ),
-                                Text(
-                                  snapshot.data.contentType,
-                                  style: TextStyle(
-                                      color: Color(0xFFf1faee), fontSize: 20.0),
-                                ),
-                                (snapshot.data.imdbScoring != null)
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.all(3.0),
-                                            child: Icon(Icons.star,
-                                                color: Colors.amber),
-                                          ),
-                                          Text(
-                                              snapshot.data.imdbScoring
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  color: Color(0xFFf1faee),
-                                                  fontSize: 20.0)),
-                                          Text(
-                                            '/10',
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0),
-                                            child: Container(
-                                                width: width * 0.1,
-                                                child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                        'assets/imdb-logo-transparent.png'))),
-                                          )
-                                        ],
-                                      )
-                                    : Container(),
-                                (snapshot.data.tmdbScoring != null)
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.all(3.0),
-                                            child: Icon(Icons.star,
-                                                color: Colors.amber),
-                                          ),
-                                          Text(
-                                              snapshot.data.tmdbScoring
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  color: Color(0xFFf1faee),
-                                                  fontSize: 20.0)),
-                                          Text(
-                                            '/10',
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0),
-                                            child: Container(
-                                                width: width * 0.1,
-                                                child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                        'assets/tmdb-logo.png'))),
-                                          )
-                                        ],
-                                      )
-                                    : Container()
-                              ],
-                            ),
-                            Expanded(
-                                child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Text(
-                                snapshot.data.description,
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(color: Color(0xFFf1faee)),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Card(
+                        elevation: 8.0,
+                        color: Color(0xFF525252),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                        width: width * 0.25,
+                                        child: Image(
+                                            image: NetworkImage(posterUrl))),
+                                  ),
+                                  Text(
+                                    snapshot.data.contentType,
+                                    style: TextStyle(
+                                        color: Color(0xFFf1faee), fontSize: 20.0),
+                                  ),
+                                  (snapshot.data.imdbScoring != null)
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.all(3.0),
+                                              child: Icon(Icons.star,
+                                                  color: Colors.amber),
+                                            ),
+                                            Text(
+                                                snapshot.data.imdbScoring
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Color(0xFFf1faee),
+                                                    fontSize: 20.0)),
+                                            Text(
+                                              '/10',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 5.0),
+                                              child: Container(
+                                                  width: width * 0.1,
+                                                  child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: Image.asset(
+                                                          'assets/imdb-logo-transparent.png'))),
+                                            )
+                                          ],
+                                        )
+                                      : Container(),
+                                  (snapshot.data.tmdbScoring != null)
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.all(3.0),
+                                              child: Icon(Icons.star,
+                                                  color: Colors.amber),
+                                            ),
+                                            Text(
+                                                snapshot.data.tmdbScoring
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Color(0xFFf1faee),
+                                                    fontSize: 20.0)),
+                                            Text(
+                                              '/10',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 5.0),
+                                              child: Container(
+                                                  width: width * 0.1,
+                                                  child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: Image.asset(
+                                                          'assets/tmdb-logo.png'))),
+                                            )
+                                          ],
+                                        )
+                                      : Container()
+                                ],
                               ),
-                            ))
-                          ],
+                              Expanded(
+                                  child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                                child: Text(
+                                  snapshot.data.description,
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(color: Color(0xFFf1faee)),
+                                ),
+                              ))
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -510,53 +568,56 @@ class _MoviePageState extends State<MoviePage> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    Card(
-                      elevation: 8.0,
-                      color: Color(0xFF525252),
-                      child: (snapshot.data.providers != null)
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children:
-                                  _buildProvidersList(snapshot.data.providers) +
-                                      <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: Center(
-                                            child: Text(
-                                              'tap the provider to start watching',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle: FontStyle.italic,
-                                                color: Color(0xFFf1faee),
-                                                shadows: <Shadow>[
-                                                  Shadow(
-                                                    offset: Offset(
-                                                        0.0,
-                                                        ScreenUtil()
-                                                            .setHeight(4.0)),
-                                                    blurRadius: 0.0,
-                                                    color: Color(0xFFff6b6b),
-                                                  )
-                                                ],
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Card(
+                        elevation: 8.0,
+                        color: Color(0xFF525252),
+                        child: (snapshot.data.providers != null)
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:
+                                    _buildProvidersList(snapshot.data.providers) +
+                                        <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Center(
+                                              child: Text(
+                                                'tap the provider to start watching',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle: FontStyle.italic,
+                                                  color: Color(0xFFf1faee),
+                                                  shadows: <Shadow>[
+                                                    Shadow(
+                                                      offset: Offset(
+                                                          0.0,
+                                                          ScreenUtil()
+                                                              .setHeight(4.0)),
+                                                      blurRadius: 0.0,
+                                                      color: Color(0xFFff6b6b),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        )
-                                      ],
-                            )
-                          : Center(
-                              child: Container(
-                                  decoration:
-                                      BoxDecoration(color: Color(0xFF525252)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                        'oops... we could not find any providers at the moment...',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: Color(0xFFf1faee))),
-                                  )),
-                            ),
+                                          )
+                                        ],
+                              )
+                            : Center(
+                                child: Container(
+                                    decoration:
+                                        BoxDecoration(color: Color(0xFF525252)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                          'oops... we could not find any providers at the moment...',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Color(0xFFf1faee))),
+                                    )),
+                              ),
+                      ),
                     )
                   ],
                 ),

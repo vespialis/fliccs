@@ -29,6 +29,8 @@ dependencies:
   auto_size_text:
   flutter_screenutil:
   url_launcher:
+  intl:
+  test:
 
 # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -72,6 +74,14 @@ flutter:
     - assets/fliccs_searchbar.png
     - assets/imdb-logo-transparent.png
     - assets/tmdb-logo.png
+    - assets/chili.png
+    - assets/google.png
+    - assets/hbo_go.png
+    - assets/netflix.png
+    - assets/prime_video.png
+    - assets/youtube.png
+    - assets/itunes.png
+    - assets/hbo.png
   fonts:
     - family: Montserrat
       fonts:

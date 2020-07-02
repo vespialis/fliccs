@@ -140,16 +140,14 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
               child: ListTile(
                 leading: AspectRatio(
                   aspectRatio: 1,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Color(0xFF424242),
-                            width: 1,
-                          ),
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(movie.getThumbnailUrl())))),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(75.0),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/fliccs_logo.png',
+                      image: movie.getThumbnailUrl(),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
                 title: Text(movie.name),
                 trailing: Icon(Icons.keyboard_arrow_right,

@@ -1,4 +1,5 @@
 import 'package:requests/requests.dart';
+import 'package:intl/intl.dart';
 
 var header = {'User-Agent': 'JustWatch Fliccs client'};
 
@@ -124,6 +125,32 @@ class JustWatch {
     }
     return movie;
   }
+
+  Future<dynamic> getCinemaTimes(
+      Movie movie, double latitude, double longitude, int radius) async {
+    if (this.locale == null) this.locale = await setLocale();
+    var dateNow = DateTime.now();
+    var formatter = DateFormat('yyyy-MM-dd');
+    String dateString = formatter.format(dateNow);
+    String apiUrl = this.apiBaseTemplate +
+        'titles/' +
+        movie.contentType +
+        '/' +
+        movie.id.toString() +
+        '/showtimes';
+    var payload = {
+      "date": dateString,
+      "latitude": latitude,
+      "longitude": longitude,
+      "radius": radius
+    };
+
+    var r = await Requests.get(apiUrl, headers: header, json: payload);
+    await r.raiseForStatus();
+    var jsonResults = await r.json();
+    print(jsonResults);
+    return jsonResults;
+  }
 }
 
 class Movie {
@@ -141,7 +168,7 @@ class Movie {
 
   String getThumbnailUrl() {
     String thumbnailUrl =
-        "https://res.cloudinary.com/dq7vqxdwd/image/fetch/w_100,h_100,c_fill,g_face,r_max,f_auto/" +
+        "https://res.cloudinary.com/dq7vqxdwd/image/fetch/w_100,h_100,c_fill,g_face,f_auto/" +
             'https://images.justwatch.com' +
             this.posterUrl.replaceAll('{profile}', 's592');
     return (thumbnailUrl);
